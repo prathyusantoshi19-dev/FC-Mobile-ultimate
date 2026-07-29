@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#07120b"><title>FC GOAT</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07120b;color:#fff;font-family:Arial,sans-serif}button{cursor:pointer;border:0;border-radius:12px;padding:12px 18px;font-weight:800}
+.hero{min-height:100vh;background:radial-gradient(circle at 70% 20%,#234f38,#07120b 55%);padding:22px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;max-width:1200px;margin:auto}.logo{font-size:38px;font-weight:1000;letter-spacing:-2px}.wallet{background:#ffffff12;border:1px solid #ffffff22;border-radius:14px;padding:10px 15px}
+.nav{max-width:1200px;margin:25px auto 15px;display:flex;gap:8px;overflow:auto}.nav button{background:#16261d;color:#fff;white-space:nowrap}.nav .active{background:#ffd43b;color:#111}
+.page{max-width:1200px;margin:auto}.banner{background:linear-gradient(100deg,#b68a18,#ffd43b 45%,#7c5a0c);border-radius:22px;padding:25px;color:#111;display:flex;justify-content:space-between;gap:20px;align-items:center}.banner h1{font-size:clamp(30px,6vw,58px);margin:0}.banner p{margin:6px 0;font-weight:700}.count{font-size:25px;font-weight:1000}.section{margin-top:25px}.section h2{margin-bottom:12px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}.card{background:linear-gradient(145deg,#18271f,#0d1712);border:1px solid #ffffff18;border-radius:18px;padding:14px;min-height:220px;position:relative;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,#ffd43b12);pointer-events:none}.rarity{font-size:12px;color:#ffd43b;font-weight:900}.rating{font-size:43px;font-weight:1000}.avatar{height:75px;border-radius:12px;background:linear-gradient(135deg,#3d79ff,#152a62);display:flex;align-items:center;justify-content:center;font-size:48px;margin:8px 0}.name{font-size:18px;font-weight:900}.pos{opacity:.65}.stats{display:flex;justify-content:space-between;margin-top:10px;font-size:12px}.event{background:#111d17;border-radius:18px;padding:18px;border:1px solid #ffffff16}.event h3{margin:0;color:#ffd43b}.progress{height:10px;background:#ffffff15;border-radius:8px;overflow:hidden;margin:12px 0}.progress i{display:block;height:100%;width:65%;background:#ffd43b}.event button{background:#ffd43b}.note{opacity:.65;font-size:13px;margin-top:8px}
+</style></head>
+<body>
+<div class="hero"><div class="top"><div class="logo">⚽ FC GOAT</div><div class="wallet">🪙 <b id="coins">25,000</b></div></div>
+<div class="nav"><button class="active">HOME</button><button>EVENTS</button><button>MY TEAM</button><button>PLAY</button><button>STORE</button></div>
+<div class="page">
+<div class="banner"><div><h1 id="eventName">GOAT LEGENDS</h1><p>New event every 20 days • Earn rewards and build your ultimate squad.</p><div class="count">Next event in <span id="count">20d 00h 00m</span></div></div><button onclick="alert('Event match started!')">PLAY EVENT</button></div>
+<div class="section"><h2>🔥 Featured Players</h2><div class="cards" id="players"></div></div>
+<div class="section"><h2>🏆 Current Events</h2><div class="event"><h3>GOAT LEGENDS — Chapter 1</h3><p>Complete matches and challenges to earn Event Points. Unlock premium original FC GOAT players.</p><div class="progress"><i></i></div><b>6,500 / 10,000 Event Points</b><br><button onclick="alert('Challenge completed! +500 Event Points')">PLAY CHALLENGE</button><div class="note">Event cycle: 20 days. The event theme and rewards rotate automatically.</div></div></div>
+<div class="section"><h2>⭐ Upcoming Event</h2><div class="event"><h3>RISING STARS</h3><p>Young superstars, special challenges and exclusive high-rated cards.</p><b>Unlocks when the current 20-day cycle ends.</b></div></div>
+</div></div>
+<script>
+const players=[
+['96','A. Storm','ST','⚡','GOAT ICON'],['95','L. Blaze','LW','🔥','GOAT ICON'],['94','K. Titan','CB','🛡️','GOAT ICON'],['93','M. Falcon','CM','🦅','ELITE'],['92','R. Phantom','GK','🧤','ELITE'],['91','J. Rocket','RW','🚀','ELITE']
+];
+document.getElementById('players').innerHTML=players.map(p=>`<div class="card"><div class="rarity">${p[4]}</div><div class="rating">${p[0]}</div><div class="avatar">${p[3]}</div><div class="name">${p[1]}</div><div class="pos">${p[2]}</div><div class="stats"><span>PACE 95</span><span>SHOOT 94</span><span>PASS 91</span></div></div>`).join('');
+let start=localStorage.fcGoatEventStart;
+if(!start){start=Date.now();localStorage.fcGoatEventStart=start}
+function tick(){let end=+start+20*24*60*60*1000, left=Math.max(0,end-Date.now());if(left===0){start=Date.now();localStorage.fcGoatEventStart=start;left=20*24*60*60*1000}
+let d=Math.floor(left/86400000),h=Math.floor(left%86400000/3600000),m=Math.floor(left%3600000/60000);document.getElementById('count').textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m`}
+tick();setInterval(tick,30000);
+</script></body></html>
